@@ -1,4 +1,4 @@
-
+import pygame
 import random
 
 # Pygame initalisieren
@@ -11,8 +11,8 @@ pygame.init()
 class SpaceShip(pygame.sprite.Sprite):                                        
     def __init__(self, x_coordinate, y_coordinate):                                                  
         super().__init__()														# brauchst du nicht zu wissen
-        self.image  = pygame.image.load("res/images/plane.png").convert_alpha()	# Bild laden
-        self.image = pygame.transform.scale(self.image, (150,150))				# Bild skalieren (vergrössern/verkleinern)
+        self.image  = pygame.image.load("res/images/space_ship.png").convert_alpha()	# Bild laden
+        self.image = pygame.transform.scale(self.image, (46,100))				# Bild skalieren (vergrössern/verkleinern)
         self.rect   = self.image.get_rect()										# Umrechteck bestimmen
         self.rect.x = x_coordinate												# x-Startpunkt
         self.rect.y = y_coordinate												# y-Startpunkt
@@ -24,9 +24,24 @@ class SpaceShip(pygame.sprite.Sprite):
 
 def move_players():
     keys = pygame.key.get_pressed()						# Abfrage aller Tasten
-    if keys[pygame.K_w]: 							 	# True falls w gedrückt wird
-        space_ship.rect.y -= space_ship.speed			# Änderung der y-Koordinate des Space Ship
+    if keys[pygame.K_w] and space_ship.rect.y > 0:				 	# True falls w gedrückt wird
+        space_ship.rect.y -= space_ship.speed	
+    if keys[pygame.K_a] and space_ship.rect.x < 1250:
+        space_ship.rect.x -= space_ship.speed
+    if keys[pygame.K_d]: and space_ship.rect.x > 0:
+        space_ship.rect.x += space_ship.speed
+    if keys[pygame.K_s]: and space_ship.rect.y < 750
+        space_ship.rect.y += space_ship.speed		# Änderung der y-Koordinate des Space Ship
 
+    keys = pygame.key.get_pressed()						# Abfrage aller Tasten
+    if keys[pygame.K_UP] and space_ship2.rect.y > 0:				 	# True falls w gedrückt wird
+        space_ship2.rect.y -= space_ship.speed
+    if keys[pygame.K_LEFT] and space_ship2.rect.y > 0:
+        space_ship2.rect.x -= space_ship.speed
+    if keys[pygame.K_RIGHT]:
+        space_ship2.rect.x += space_ship.speed
+    if keys[pygame.K_DOWN]:
+        space_ship2.rect.y += space_ship.speed	
 
 def draw_game():
     screen.blit(background_image_game, (0,0))			# Hintergrund wird gezeichnet an Stelle 0,0
@@ -35,24 +50,25 @@ def draw_game():
 ####################################################################################
 # Globale variablen initialisieren
 # ----------------------------------------------------------------------------------
-
 # Grösse des Spielfenster setzen
-screen_width = 800
-screen_height = 600
+screen_width = 1250
+screen_height = 750
 screen = pygame.display.set_mode((screen_width, screen_height))		# Fenstergrösse festlegen
-pygame.display.set_caption("Fighting Plane")						# Titel des Fensters setzen
+pygame.display.set_caption("Space Shooter   ")						# Titel des Fensters setzen
 clock = pygame.time.Clock() 					   					# Eine Pygame-Uhr um die Framerate zu kontrollieren
 
 # Hintergrundbilder auf https://www.freepik.com/
-background_image_game = pygame.image.load("res/images/background_start.jpg")		# Hintergrundbild laden
-background_image_game = pygame.transform.scale(background_image_game, (300, 300))	# Hintergrundbild skalieren
+background_image_game = pygame.image.load("res/images/background_game.jpg")		# Hintergrundbild laden
+background_image_game = pygame.transform.scale(background_image_game, (screen_width, screen_height))	# Hintergrundbild skalieren
 
 # Spielstatus zu Beginn
 game_status = "game"
-space_ship = SpaceShip(100, 400)			 # Erstellen eines Space Ships
+space_ship = SpaceShip((screen_width/3), (screen_height/4*3))
+space_ship2= SpaceShip((screen_width/3*2), (screen_height/4*3))			 # Erstellen eines Space Ships
 
 player_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
-player_sprites.add(space_ship)               # Die Spieler in die Gruppe legen
+player_sprites.add(space_ship)  
+player_sprites.add(space_ship2)             # Die Spieler in die Gruppe legen
 
 
 ####################################################################################
