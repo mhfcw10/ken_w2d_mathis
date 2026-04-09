@@ -1,6 +1,6 @@
 import pygame
 import random
-
+# adfafk
 # Pygame initialisieren
 pygame.init()
         # Hilfsfunktion, um Bilder zu laden 
