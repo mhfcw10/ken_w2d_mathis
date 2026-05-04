@@ -1,6 +1,6 @@
 import pygame
 import random
-# adfafk
+
 # Pygame initialisieren
 pygame.init()
         # Hilfsfunktion, um Bilder zu laden 
@@ -27,7 +27,7 @@ class Button(pygame.sprite.Sprite):
 # Baupläne (=Klassendefinitionen)
 # ----------------------------------------------------------------------------------
 
-class SpaceShip(pygame.sprite.Sprite):
+class (pygame.sprite.Sprite):
     def __init__(self, x_coordinate, y_coordinate):
         super().__init__()
         self.image = pygame.image.load("res/images/space_ship.png").convert_alpha()

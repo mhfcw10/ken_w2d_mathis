@@ -8,7 +8,7 @@ pygame.init()
 # Baupläne (=Klassendefinitionen)
 # ----------------------------------------------------------------------------------
 
-class SpaceShip(pygame.sprite.Sprite):                                        
+class PaceRacer(pygame.sprite.Sprite):                                        
     def __init__(self, x_coordinate, y_coordinate):                                                  
         super().__init__()														# brauchst du nicht zu wissen
         self.image  = pygame.image.load("res/images/space_ship.png").convert_alpha()	# Bild laden
@@ -41,10 +41,10 @@ background_image_game = pygame.transform.scale(background_image_game, (screen_wi
 
 # Spielstatus zu Beginn
 game_status = "game"
-space_ship = SpaceShip(screen_width / 3, screen_height * 3 / 4)			 # Erstellen eines Space Ships
+pace_racer = PaceRacer(screen_width / 3, screen_height * 3 / 4)			 # Erstellen eines Space Ships
 
 player_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
-player_sprites.add(space_ship)               # Die Spieler in die Gruppe legen
+player_sprites.add(pace_racer)               # Die Spieler in die Gruppe legen
 
 ####################################################################################
 # Spielschleife
