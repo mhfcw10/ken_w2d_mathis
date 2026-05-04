@@ -45,7 +45,7 @@ clock = pygame.time.Clock() 					   					# Eine Pygame-Uhr um die Framerate zu k
 
 
 # Hintergrundbilder auf https://www.freepik.com/
-background_image_game = pygame.image.load("res/images/background_game.jpg")		# Hintergrundbild laden
+background_image_game = pygame.image.load("res/images/orangenbaum.png")		# Hintergrundbild laden
 background_image_game = pygame.transform.scale(background_image_game, (screen_width, screen_height))	# Hintergrundbild skalieren
 
 # Spielstatus zu Beginn
