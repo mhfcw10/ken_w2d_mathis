@@ -50,7 +50,7 @@ background_image_game = pygame.transform.scale(background_image_game, (screen_wi
 
 # Spielstatus zu Beginn
 game_status = "game"
-pace_racer = PaceRacer(screen_width / 3, screen_height * 3 / 4)			 # Erstellen eines Space Ships
+pace_racer = PaceRacer(screen_width / 100, screen_height * 3.15 / 4)			 # Erstellen eines Space Ships
 orange = Orange(screen_width/2, screen_height/2)
 
 player_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
