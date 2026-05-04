@@ -16,6 +16,7 @@ class PaceRacer(pygame.sprite.Sprite):
         self.rect   = self.image.get_rect()										# Umrechteck bestimmen
         self.rect.x = x_coordinate												# x-Startpunkt
         self.rect.y = y_coordinate												# y-Startpunkt
+        self.speed = 10
 
 class Orange(pygame.sprite.Sprite):                                        
     def __init__(self, x_coordinate, y_coordinate):                                                  
@@ -31,6 +32,11 @@ def draw_game():
     screen.blit(background_image_game, (0,0))			# Hintergrund wird gezeichnet an Stelle 0,0
     player_sprites.draw(screen)         				# Objekte in Gruppe player_sprites werden gezeichnet
     orangen_sprites.draw(screen)
+
+def move_players():
+    keys = pygame.key.get_pressed()						# Abfrage aller Tasten
+    if keys[pygame.K_UP]: 							 	# True falls w gedrückt wird
+        pace_racer.rect.y -= pace_racer.speed
 
 ####################################################################################
 # Globale variablen initialisieren
@@ -50,7 +56,7 @@ background_image_game = pygame.transform.scale(background_image_game, (screen_wi
 
 # Spielstatus zu Beginn
 game_status = "game"
-pace_racer = PaceRacer(screen_width / 100, screen_height * 3.15 / 4)			 # Erstellen eines Space Ships
+pace_racer = PaceRacer(screen_width / 100  , screen_height * 3.15 / 4)			 # Erstellen eines Space Ships
 orange = Orange(screen_width/2, screen_height/2)
 
 player_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
@@ -70,6 +76,7 @@ while is_game_running:
    
     if game_status == "game":
         draw_game()
+        move_players()
 
          
     pygame.display.update()  								# Fenster updaten
