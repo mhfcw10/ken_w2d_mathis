@@ -11,8 +11,8 @@ pygame.init()
 class PaceRacer(pygame.sprite.Sprite):                                        
     def __init__(self, x_coordinate, y_coordinate):                                                  
         super().__init__()														# brauchst du nicht zu wissen
-        self.image  = pygame.image.load("res/images/space_ship.png").convert_alpha()	# Bild laden
-        self.image = pygame.transform.scale(self.image, (46,100))				# Bild skalieren (vergrössern/verkleinern)
+        self.image  = pygame.image.load("res/images/PaceRacer.png").convert_alpha()	# Bild laden
+        self.image = pygame.transform.scale(self.image, (75,125))				# Bild skalieren (vergrössern/verkleinern)
         self.rect   = self.image.get_rect()										# Umrechteck bestimmen
         self.rect.x = x_coordinate												# x-Startpunkt
         self.rect.y = y_coordinate												# y-Startpunkt
@@ -21,7 +21,7 @@ class Orange(pygame.sprite.Sprite):
     def __init__(self, x_coordinate, y_coordinate):                                                  
         super().__init__()														# brauchst du nicht zu wissen
         self.image  = pygame.image.load("res/images/Orange.png").convert_alpha()	# Bild laden
-        self.image = pygame.transform.scale(self.image, (46,100))				# Bild skalieren (vergrössern/verkleinern)
+        self.image = pygame.transform.scale(self.image, (60,60))				# Bild skalieren (vergrössern/verkleinern)
         self.rect   = self.image.get_rect()										# Umrechteck bestimmen
         self.rect.x = x_coordinate												# x-Startpunkt
         self.rect.y = y_coordinate	
