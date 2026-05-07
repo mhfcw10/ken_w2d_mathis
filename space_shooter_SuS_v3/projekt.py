@@ -17,6 +17,7 @@ class PaceRacer(pygame.sprite.Sprite):
         self.rect.x = x_coordinate												# x-Startpunkt
         self.rect.y = y_coordinate												# y-Startpunkt
         self.speed = 10
+        self.lives = 3
 
 class Orange(pygame.sprite.Sprite):                                        
     def __init__(self, x_coordinate, y_coordinate):                                                  
@@ -32,6 +33,9 @@ def draw_game():
     screen.blit(background_image_game, (0,0))			# Hintergrund wird gezeichnet an Stelle 0,0
     player_sprites.draw(screen)         				# Objekte in Gruppe player_sprites werden gezeichnet
     orangen_sprites.draw(screen)
+
+        for i in range(0, pace_racer.lives):
+        screen.blit(heart_image, (10 + i * 35, 10))
 
 def move_players():
     keys = pygame.key.get_pressed()						# Abfrage aller Tasten
@@ -53,6 +57,9 @@ clock = pygame.time.Clock() 					   					# Eine Pygame-Uhr um die Framerate zu k
 # Hintergrundbilder auf https://www.freepik.com/
 background_image_game = pygame.image.load("res/images/orangenbaum.png")		# Hintergrundbild laden
 background_image_game = pygame.transform.scale(background_image_game, (screen_width, screen_height))	# Hintergrundbild skalieren
+
+heart_image = pygame.image.load("res/images/heart.png").convert_alpha()
+heart_image = pygame.transform.scale(heart_image, (25, 22))
 
 # Spielstatus zu Beginn
 game_status = "game"
