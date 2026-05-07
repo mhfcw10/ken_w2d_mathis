@@ -34,7 +34,7 @@ def draw_game():
     player_sprites.draw(screen)         				# Objekte in Gruppe player_sprites werden gezeichnet
     orangen_sprites.draw(screen)
 
-        for i in range(0, pace_racer.lives):
+    for i in range(0, pace_racer.lives):
         screen.blit(heart_image, (10 + i * 35, 10))
 
 def move_players():
