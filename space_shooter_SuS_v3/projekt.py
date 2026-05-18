@@ -42,6 +42,8 @@ class Ziel(pygame.sprite.Sprite):
 def check_collisions():
     for paceracer in player_sprites:
         if paceracer.rect.colliderect(ziel.rect):
+            return "gewonnen"
+    return "game"
           
             
         
@@ -106,7 +108,7 @@ heart_image = pygame.transform.scale(heart_image, (25, 22))
 # Spielstatus zu Beginn
 game_status = "game"
 pace_racer = PaceRacer(screen_width / 100  , screen_height * 3.15 / 4)			 # Erstellen eines Space Ships
-orange = Orange(screen_width/2, screen_height/2)
+orange = Orange(2)
 ziel = Ziel()
 
 player_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
@@ -136,6 +138,7 @@ while is_game_running:
         move_players()
         last_spawn_time = create_orangen(last_spawn_time)
         move_orangen()
+        game_status = check_collisions()
 
          
     pygame.display.update()  								# Fenster updaten
