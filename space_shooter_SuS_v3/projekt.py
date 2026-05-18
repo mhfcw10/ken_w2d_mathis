@@ -28,12 +28,20 @@ class Orange(pygame.sprite.Sprite):
         self.rect.x = x_coordinate												# x-Startpunkt
         self.rect.y = y_coordinate	
 
+class Ziel(pygame.sprite.Sprite):                                        
+    def __init__(self):                                                  
+        super().__init__()														# brauchst du nicht zu wissen
+        self.image  = pygame.image.load("res/images/Ziel Bild.png").convert_alpha()	# Bild laden
+        self.image = pygame.transform.scale(self.image, (60,60))				# Bild skalieren (vergrössern/verkleinern)
+        self.rect   = self.image.get_rect()										# Umrechteck bestimmen
+        self.rect.x = 740					# x-Startpunkt
+        self.rect.y = 0
 
 def draw_game():
     screen.blit(background_image_game, (0,0))			# Hintergrund wird gezeichnet an Stelle 0,0
     player_sprites.draw(screen)         				# Objekte in Gruppe player_sprites werden gezeichnet
     orangen_sprites.draw(screen)
-
+    ziel_sprites.draw(screen)
     for i in range(0, pace_racer.lives):
         screen.blit(heart_image, (10 + i * 35, 10))
 
@@ -71,12 +79,18 @@ heart_image = pygame.transform.scale(heart_image, (25, 22))
 game_status = "game"
 pace_racer = PaceRacer(screen_width / 100  , screen_height * 3.15 / 4)			 # Erstellen eines Space Ships
 orange = Orange(screen_width/2, screen_height/2)
+ziel = Ziel()
 
 player_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
 player_sprites.add(pace_racer)               # Die Spieler in die Gruppe legen
 
 orangen_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
 orangen_sprites.add(orange)
+
+ziel_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
+ziel_sprites.add(ziel)
+
+
 ####################################################################################
 # Spielschleife
 # ----------------------------------------------------------------------------------
