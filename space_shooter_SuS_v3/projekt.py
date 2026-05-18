@@ -20,13 +20,15 @@ class PaceRacer(pygame.sprite.Sprite):
         self.lives = 3
 
 class Orange(pygame.sprite.Sprite):                                        
-    def __init__(self, x_coordinate, y_coordinate):                                                  
+    def __init__(self, speed_orange):                                                  
         super().__init__()														# brauchst du nicht zu wissen
         self.image  = pygame.image.load("res/images/Orange.png").convert_alpha()	# Bild laden
         self.image = pygame.transform.scale(self.image, (60,60))				# Bild skalieren (vergrössern/verkleinern)
         self.rect   = self.image.get_rect()										# Umrechteck bestimmen
-        self.rect.x = x_coordinate												# x-Startpunkt
-        self.rect.y = y_coordinate	
+        self.rect.x = random.randint(50,750)												# x-Startpunkt
+        self.rect.y = random.randint(100,300)
+        self.speed= speed_orange
+
 
 
 def draw_game():
@@ -47,6 +49,26 @@ def move_players():
         pace_racer.rect.x -= pace_racer.speed
     if keys[pygame.K_DOWN]:
         pace_racer.rect.y += pace_racer.speed
+
+def move_orangen():
+    for orange in orangen_sprites:
+        orange.rect.y += orange.speed
+        if orange.rect.y > screen_height:
+            orange.kill()
+
+
+def create_orangen(last_spawn_time):
+    current_time = pygame.time.get_ticks()
+
+    # neues Ufo nach zufälliger Zeit von 1 bis 4 Sekunden
+    if current_time - last_spawn_time > 500 + random.randint(0, 2000):
+        orange = Orange(random.randint(2, 7))
+        orangen_sprites.add(orange)
+        last_spawn_time = current_time
+
+    return last_spawn_time
+
+
 
 ####################################################################################
 # Globale variablen initialisieren
@@ -70,16 +92,18 @@ heart_image = pygame.transform.scale(heart_image, (25, 22))
 # Spielstatus zu Beginn
 game_status = "game"
 pace_racer = PaceRacer(screen_width / 100  , screen_height * 3.15 / 4)			 # Erstellen eines Space Ships
-orange = Orange(screen_width/2, screen_height/2)
+
 
 player_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
 player_sprites.add(pace_racer)               # Die Spieler in die Gruppe legen
 
 orangen_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
-orangen_sprites.add(orange)
+
 ####################################################################################
 # Spielschleife
 # ----------------------------------------------------------------------------------
+
+last_spawn_time = pygame.time.get_ticks()
 
 is_game_running = True
 while is_game_running:
@@ -90,6 +114,8 @@ while is_game_running:
     if game_status == "game":
         draw_game()
         move_players()
+        last_spawn_time = create_orangen(last_spawn_time)
+        move_orangen()
 
          
     pygame.display.update()  								# Fenster updaten
