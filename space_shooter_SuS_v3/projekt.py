@@ -105,6 +105,8 @@ background_image_game = pygame.transform.scale(background_image_game, (screen_wi
 heart_image = pygame.image.load("res/images/heart.png").convert_alpha()
 heart_image = pygame.transform.scale(heart_image, (25, 22))
 
+my_bg_music = pygame.mixer.Sound("res/sounds/background_sound.mp3")
+pygame.mixer.Sound.play(my_bg_music, -1)
 # Spielstatus zu Beginn
 game_status = "game"
 pace_racer = PaceRacer(screen_width / 100  , screen_height * 3.15 / 4)			 # Erstellen eines Space Ships
