@@ -37,6 +37,12 @@ class Ziel(pygame.sprite.Sprite):
         self.rect.x = 740					# x-Startpunkt
         self.rect.y = 0
 
+def check_collisions():
+    for paceracer in player_sprites:
+        if paceracer.rect.colliderect(ziel.rect):
+          
+            
+        
 def draw_game():
     screen.blit(background_image_game, (0,0))			# Hintergrund wird gezeichnet an Stelle 0,0
     player_sprites.draw(screen)         				# Objekte in Gruppe player_sprites werden gezeichnet
@@ -47,13 +53,13 @@ def draw_game():
 
 def move_players():
     keys = pygame.key.get_pressed()						# Abfrage aller Tasten
-    if keys[pygame.K_UP]: 							 	# True falls w gedrückt wird
+    if keys[pygame.K_UP] and pace_racer.rect.y > 0:						 	# True falls w gedrückt wird
         pace_racer.rect.y -= pace_racer.speed
-    if keys [pygame.K_RIGHT]:
+    if keys [pygame.K_RIGHT]  and pace_racer.rect.x < screen_width - pace_racer.rect.width:
         pace_racer.rect.x += pace_racer.speed 
-    if keys [pygame.K_LEFT]:
+    if keys [pygame.K_LEFT]  and pace_racer.rect.x > 0:
         pace_racer.rect.x -= pace_racer.speed
-    if keys[pygame.K_DOWN]:
+    if keys[pygame.K_DOWN] and pace_racer.rect.y < screen_height - pace_racer.rect.height:
         pace_racer.rect.y += pace_racer.speed
 
 ####################################################################################
