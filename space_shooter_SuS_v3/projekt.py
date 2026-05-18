@@ -43,6 +43,14 @@ def check_collisions():
     for paceracer in player_sprites:
         if paceracer.rect.colliderect(ziel.rect):
             return "gewonnen"
+    for orange in orangen_sprites:
+        if orange.rect.colliderect(pace_racer.rect):
+            pace_racer.lives -= 1
+            orange.kill()
+
+    if pace_racer.lives <= 0:
+        return "game_over"
+
     return "game"
           
             
@@ -71,6 +79,11 @@ def move_orangen():
         orange.rect.y += orange.speed
         if orange.rect.y > screen_height:
             orange.kill()
+
+
+def draw_game_over():
+    screen.blit(game_over_image, (0,0))
+
 
 
 def create_orangen(last_spawn_time):
@@ -104,6 +117,9 @@ background_image_game = pygame.transform.scale(background_image_game, (screen_wi
 
 heart_image = pygame.image.load("res/images/heart.png").convert_alpha()
 heart_image = pygame.transform.scale(heart_image, (25, 22))
+
+game_over_image = pygame.image.load("res/images/Game Over Bild.png")
+game_over_image = pygame.transform.scale(game_over_image, (screen_width, screen_height))
 
 my_bg_music = pygame.mixer.Sound("res/sounds/background_sound.mp3")
 pygame.mixer.Sound.play(my_bg_music, -1)
@@ -141,6 +157,9 @@ while is_game_running:
         last_spawn_time = create_orangen(last_spawn_time)
         move_orangen()
         game_status = check_collisions()
+
+    if game_status == "game_over":
+        draw_game_over()
 
          
     pygame.display.update()  								# Fenster updaten
