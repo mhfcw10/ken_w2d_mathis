@@ -41,6 +41,12 @@ def move_players():
     keys = pygame.key.get_pressed()						# Abfrage aller Tasten
     if keys[pygame.K_UP]: 							 	# True falls w gedrückt wird
         pace_racer.rect.y -= pace_racer.speed
+    if keys [pygame.K_RIGHT]:
+        pace_racer.rect.x += pace_racer.speed 
+    if keys [pygame.K_LEFT]:
+        pace_racer.rect.x -= pace_racer.speed
+    if keys[pygame.K_DOWN]:
+        pace_racer.rect.y += pace_racer.speed
 
 ####################################################################################
 # Globale variablen initialisieren
