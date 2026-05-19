@@ -84,6 +84,8 @@ def move_orangen():
 def draw_game_over():
     screen.blit(game_over_image, (0,0))
 
+def draw_gewonnen():
+    screen.blit(gewonnen_image, (0,0))
 
 
 def create_orangen(last_spawn_time):
@@ -120,6 +122,9 @@ heart_image = pygame.transform.scale(heart_image, (25, 22))
 
 game_over_image = pygame.image.load("res/images/Game Over Bild.png")
 game_over_image = pygame.transform.scale(game_over_image, (screen_width, screen_height)) 
+
+gewonnen_image = pygame.image.load("res/images/Gewonnen_image.png")
+gewonnen_image = pygame.transform.scale(gewonnen_image, (screen_width, screen_height)) 
 
 my_bg_music = pygame.mixer.Sound("res/sounds/background_sound.mp3")
 pygame.mixer.Sound.play(my_bg_music, -1)
@@ -159,7 +164,10 @@ while is_game_running:
         game_status = check_collisions()
 
     if game_status == "game_over":
-        draw_game_over()
+        draw_game_over() 
+
+    if game_status == "gewonnen":
+        draw_gewonnen()
 
          
     pygame.display.update()  								# Fenster updaten
