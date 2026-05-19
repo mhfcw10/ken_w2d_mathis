@@ -17,7 +17,7 @@ class PaceRacer(pygame.sprite.Sprite):
         self.rect.x = x_coordinate												# x-Startpunkt
         self.rect.y = y_coordinate												# y-Startpunkt
         self.speed = 10
-        self.lives = 3
+        self.lives = 1
 
 class Orange(pygame.sprite.Sprite):                                        
     def __init__(self, speed_orange):                                                  
@@ -34,7 +34,7 @@ class Ziel(pygame.sprite.Sprite):
     def __init__(self):                                                  
         super().__init__()														# brauchst du nicht zu wissen
         self.image  = pygame.image.load("res/images/Ziel Bild.png").convert_alpha()	# Bild laden
-        self.image = pygame.transform.scale(self.image, (60,60))				# Bild skalieren (vergrössern/verkleinern)
+        self.image = pygame.transform.scale(self.image, (60,60))				# Bild skalieren (vergrössern/v  erkleinern)
         self.rect   = self.image.get_rect()										# Umrechteck bestimmen
         self.rect.x = 740					# x-Startpunkt
         self.rect.y = 0
@@ -107,7 +107,7 @@ def create_orangen(last_spawn_time):
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))		# Fenstergrösse festlegen
-pygame.display.set_caption("Space Shooter")							# Titel des Fensters setzen
+pygame.display.set_caption("Paceracer")							# Titel des Fensters setzen
 clock = pygame.time.Clock() 					   					# Eine Pygame-Uhr um die Framerate zu kontrollieren
 
 
@@ -119,7 +119,7 @@ heart_image = pygame.image.load("res/images/heart.png").convert_alpha()
 heart_image = pygame.transform.scale(heart_image, (25, 22))
 
 game_over_image = pygame.image.load("res/images/Game Over Bild.png")
-game_over_image = pygame.transform.scale(game_over_image, (screen_width, screen_height))
+game_over_image = pygame.transform.scale(game_over_image, (screen_width, screen_height)) 
 
 my_bg_music = pygame.mixer.Sound("res/sounds/background_sound.mp3")
 pygame.mixer.Sound.play(my_bg_music, -1)
