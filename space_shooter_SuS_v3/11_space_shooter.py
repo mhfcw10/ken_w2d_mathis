@@ -25,8 +25,8 @@ class Ufo(pygame.sprite.Sprite):
         self.image  = pygame.image.load("res/images/ufo.png").convert_alpha()	# Bild laden
         self.image = pygame.transform.scale(self.image, (100,56))				# Bild skalieren (vergrössern/verkleinern)
         self.rect   = self.image.get_rect()										# Umrechteck bestimmen
-        self.rect.x = random.randint(0, screen_width - self.rect.width)			# x-Startpunkt
-        self.rect.y = -self.rect.height											# y-Startpunkt
+        self.rect.y = random.randint(0, screen_height - self.rect.height)			# x-Startpunkt
+        self.rect.x = -self.rect.width									# y-Startpunkt
         self.speed  = ufo_speed                                					# Geschwindigkeit des Spielers
 
 
@@ -56,8 +56,8 @@ def move_players():
 
 def move_ufos():
     for ufo in ufo_sprites:
-        ufo.rect.y += ufo.speed
-        if ufo.rect.y > screen_height:
+        ufo.rect.x += ufo.speed
+        if ufo.rect.x > screen_width:
             ufo.kill()
 
 def create_ufos(last_spawn_time):
@@ -84,13 +84,11 @@ def check_game_over():
     return "game"
 
 def draw_game():
-    screen.blit(background_image_game, (0,0))			# Hintergrund wird gezeichnet an Stelle 0,0
+    screen.blit(background_image_game, (0,0))	
+    screen.blit(plane_image, (300,400))			# Hintergrund wird gezeichnet an Stelle 0,0
     player_sprites.draw(screen)         				# Objekte in Gruppe player_sprites werden gezeichnet
     ufo_sprites.draw(screen)
-    for i in range(0, space_ship.lives):
-        screen.blit(heart_image, (10 + i * 35, 10))
-    for i in range(0, space_ship2.lives):
-        screen.blit(heart_image, (screen_width - 35 - i * 35, 10))
+     
         
 def draw_game_over():
     screen.fill((0,0,0))
@@ -120,6 +118,9 @@ background_image_game = pygame.transform.scale(background_image_game, (screen_wi
 heart_image = pygame.image.load("res/images/heart.png").convert_alpha()
 heart_image = pygame.transform.scale(heart_image, (25, 22))
 
+plane_image = pygame.image.load("res/images/plane.png").convert_alpha()
+plane_image = pygame.transform.scale(plane_image, (200,100))
+
 # Musik laden und abspielen
 my_bg_music = pygame.mixer.Sound("res/sounds/background_sound.mp3")
 pygame.mixer.Sound.play(my_bg_music, -1)
@@ -132,6 +133,7 @@ space_ship2 = SpaceShip(screen_width * 2/ 3, screen_height * 3 / 4)			 # Erstell
 player_sprites = pygame.sprite.Group()       # Gruppe der player Sprites
 player_sprites.add(space_ship)               # Die Spieler in die Gruppe legen
 player_sprites.add(space_ship2)
+
 
 ufo = Ufo(2)
 ufo_sprites = pygame.sprite.Group()

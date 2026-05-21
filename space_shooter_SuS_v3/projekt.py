@@ -99,6 +99,24 @@ def create_orangen(last_spawn_time):
 
     return last_spawn_time
 
+def restart_game():
+    global pace_racer, ziel, player_sprites, orangen_sprites, ziel_sprites, game_status, last_spawn_time
+
+    game_status = "game"
+    last_spawn_time = pygame.time.get_ticks()
+
+    pace_racer = PaceRacer(screen_width / 100, screen_height * 3.15 / 4)
+    ziel = Ziel()
+
+    player_sprites = pygame.sprite.Group()
+    player_sprites.add(pace_racer)
+
+    orangen_sprites = pygame.sprite.Group()
+
+    ziel_sprites = pygame.sprite.Group()
+    ziel_sprites.add(ziel)
+
+
 
 
 ####################################################################################
@@ -155,6 +173,11 @@ while is_game_running:
     for event in pygame.event.get():						# Events wie Mausklick werden abgearbeitet
         if event.type == pygame.QUIT:						# Falls auf x geklickt wird
             is_game_running = False
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if game_status == "game_over":
+                restart_game()
+
    
     if game_status == "game":
         draw_game()
